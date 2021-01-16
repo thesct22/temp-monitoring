@@ -30,6 +30,8 @@ tn = telnetlib.Telnet("ip.address.of.LEDboard","8080")
 temp=0
 hum=0
 
+
+#sends updated value to LED board every 20 seconds
 while 1:
 
     #read temp and humidity values
@@ -40,8 +42,13 @@ while 1:
     
     #temp = ((temp * 330)/float(1023)) -50
     #hum = (hum * 100)/float(1023)
-    
+
     #will fine tune once hardware is received
 
+    #write the following ASCII to LED board through telnet protocol
+    #the ASCII format given as per pdf
+    #will change font size and other factors to fit the board after receiving the hardware
     tn.write("[01U1Y00FF0"+temp+" C\x0A"+hum+" %%XX]")
+
+    #sleeps for 20 seconds
     time.sleep(20)
